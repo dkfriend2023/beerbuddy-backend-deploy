@@ -26,7 +26,6 @@ from booking.models import *
 from booking.serializers import *
 from .serializers import *
 from .utils import make_signature
-from .models import Authentication
 from django.core.mail import EmailMessage
 import jwt
 import requests
@@ -121,27 +120,15 @@ class email(APIView):
 
 
     def post(self, request, *args, **kwargs):
-        data_ = json.dumps(request.data)
-        data = json.loads(data_)
-        try:
-            print("try")
-            input_email = data['email']
-            auth_num = random.randint(10000, 100000)  # 랜덤숫자 생성, 5자리로 계획하였다.
-            auth_mobile = Authentication.objects.get(
-                email=input_email)
-            auth_mobile.auth_number = auth_num
-            auth_mobile.save()
-            timestamp = self.send_email(email=input_email, auth_number=auth_num)
-            print("done1: ", timestamp)
-            return JsonResponse({'message': '인증번호 발송완료', '전송시간': timestamp, 'auth_num': auth_num}, status=200)
-        except Authentication.DoesNotExist:  # 인증요청번호 미 존재 시 DB 입력 로직 작성
-            Authentication.objects.create(
-                email=input_email,
-                auth_number=auth_num,
-            ).save()
-            timestamp = self.send_email(email=input_email, auth_number=auth_num)
-            print("done2: ", timestamp)
-            return JsonResponse({'message': '인증번호 발송 및 DB 입력완료', '전송시간': timestamp, 'auth_num': auth_num}, status=200)
+        input_email = request.data.get("email", None)
+
+        auth_num = random.randint(10000, 100000)  # 랜덤숫자 생성, 5자리로 계획하였다.
+        timestamp = self.send_email(email=input_email, auth_number=auth_num)
+        
+        return JsonResponse({
+            'message': '인증번호 발송완료', 
+            '전송시간': timestamp, 
+            'auth_num': auth_num}, status=200)
 
 
 # ---회원가입---
