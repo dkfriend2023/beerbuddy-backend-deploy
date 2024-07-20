@@ -47,35 +47,45 @@ class BookingPost(APIView):
         restaurant = Restaurant.objects.get(id=pk)
         request.data["restaurant"] = restaurant.id
         serializer = BookingSerializer(data=request.data)
+        date_full = request.data.get("date")
+        year, month, day = date_full.split("-") if date_full else (None, None, None)
+        time_full = request.data.get("time")
+        hour = time_full.split(":")[0] if time_full else None
+        minute = time_full.split(":")[1] if time_full else None
 
         # 유효성 검사
         if serializer.is_valid():
             booking_instance = serializer.save()
 
-            title = f'[대관친구] {request.user.user_nickname} {request.data.get("date", None)}{request.data.get("time", None)} 예약 완료'
-            content = f"""
-            예약자: {request.user.user_nickname}
-            예약명: {request.data.get("meeting_name", None)}
-            식당명: {restaurant.name}
-            예약 날짜: {request.data.get("date", None)}
-            예약 시간: {request.data.get("time", None)}
-            예약 인원: {request.data.get("people_num", None)}
-            예약 번호: {booking_instance.book_number}
-            요청 사항: {request.data.get("description", None)}
-            """
+            title = f'[비어버디] {restaurant.name} - {year}년 {month}월 {day}일 예약 요청 접수'
 
-            # 이메일 보내기
+            content = f"""
+                예약 번호: {booking_instance.book_number}
+                
+                예약자: {request.user.user_nickname}
+                
+                예약명: {request.data.get("meeting_name", None)}
+                
+                식당명: {restaurant.name}
+                
+                예약 일시: {year}년 {month}월 {day}일 {hour}시 {minute}분
+                
+                예약 인원: {request.data.get("people_num", None)}명
+                
+                요청 사항: {request.data.get("description", None)}
+
+                해당 예약은 아직 확정되지 않았습니다. 예약 확정 후 별도로 연락드리겠습니다.\n\n"""
+
             email = EmailMessage(
                 title,  # 이메일 제목
-                content,  # 내용
-                to=["beerbuddy@naver.com"],
-            )
+                content,  # 이메일 내용
+                to=[request.user.email, 'beerbuddy@naver.com', 'dkfriend.official@gmail.com'])
+            
             email.send()
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 # 예약 완료 페이지
 class BookingDetail(APIView):

@@ -19,7 +19,7 @@ urlpatterns = [
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("find/pw/", PwPost.as_view(), name="find_pw"),
     path("reset-pw/<int:pk>/", ResetPw.as_view(), name="reset_pw"),
-    path("sms/", email.as_view(), name="email"),
+    path("sms/", Email.as_view(), name="email"),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

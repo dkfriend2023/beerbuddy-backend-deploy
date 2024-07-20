@@ -32,6 +32,11 @@ import requests
 import json
 import time
 import random
+import logging
+
+# 로깅 설정
+logger = logging.getLogger(__name__)
+
 
 BASE_URL = "https://beerbuddy2023.com/"
 # --- token refresh ---
@@ -97,7 +102,7 @@ class TokenRefreshView(APIView):
         return response
 
 
-class email(APIView):
+class Email(APIView):
     def send_email(self, email, auth_number):
         timestamp = str(int(time.time() * 1000))
         
@@ -109,12 +114,11 @@ class email(APIView):
             """
 
         # 이메일 보내기
-        email = EmailMessage(
+        EmailMessage(
             title,  # 이메일 제목
             content,  # 내용
             to=[email],
-        )
-        email.send()
+        ).send()
 
         return timestamp
 
