@@ -1,6 +1,9 @@
-# beerbuddy-backend-deploy
-### api 문서: [API Documentation](https://kiara0528.notion.site/API-Documentation-1d3c8ffa841045258f1fdc07355f48d3?pvs=4)
+# BeAbuddy-backend
 
+🍻 Server-Side of BeABuddy Developed with Django
+
+- API Document:[🍻BeABuddy🍻](https://www.notion.so/API-Documentation-1d3c8ffa841045258f1fdc07355f48d3)
+- 관리자 계정 정보:[개발Repo ReadMe 확인](https://github.com/dkfriend2023/beerbuddy-backend-legacy/blob/main/README.md)
 <br>
 
 <hr>
