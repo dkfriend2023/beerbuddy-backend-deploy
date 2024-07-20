@@ -124,4 +124,4 @@ BeerBuddy is a restaurant reservation application designed to help users discove
 
 ## License
 
-This project is part of the Workstation Project by [the Institute for Higher Education Innovation at Yonsei University](https://ihei.yonsei.ac.kr/ihei/workstation.do).
+This project is supported by the Workstation Project by [the Institute for Higher Education Innovation at Yonsei University](https://ihei.yonsei.ac.kr/ihei/workstation.do).
