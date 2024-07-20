@@ -1,6 +1,11 @@
 # beerbuddy-backend-deploy
+### api 문서: (API Documentation)[https://kiara0528.notion.site/API-Documentation-1d3c8ffa841045258f1fdc07355f48d3?pvs=4]
 
-### **,,,절대 python [manage.py](http://manage.py) runserver로 실행하면 안됩니다,,,,,**
+<br>
+
+<hr>
+
+##### **,,,절대 python [manage.py](http://manage.py) runserver로 실행하면 안됩니다,,,,,**
 
 서버 코드 수정하거나 gunicorn script 변경 시(로직부분)
 
