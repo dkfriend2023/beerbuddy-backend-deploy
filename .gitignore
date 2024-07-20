@@ -1,4 +1,7 @@
 beerbuddy-media
-myvenv
 beerbuddy-db.sqlite3
 dkfriend-backend-latest/secrets.json
+beerbuddy.env           
+error.log  
+templates
+access.log
