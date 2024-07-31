@@ -49,7 +49,7 @@ BeerBuddy is a restaurant reservation application designed to help users discove
 ## Contributors
 
 - Seulmi Kang(Kiara⚡️): [GitHub](https://github.com/2020147542)
-- Subin Shin: ()
+- Soobin Shin: [GitHub](https://github.com/ssb001111)
 
 <br>
 
